@@ -1,27 +1,17 @@
 # Volumetric Rendering Using CT Scanned Data 
 
-Achilles Apostolou Mini Project
-![[RTCG-Achillefs (1)_p2_img1.png]]
 
-1. Table of Contents ..... 1
-2. Abstract ..... 2
-3. Introduction ..... 2
-3.1. Visualizing Data - Slices ..... 3
-3.1.1. Axis Alignment ..... 3
-3.1.2. Camera Alignment ..... 3
-3.1.3. Transfer Functions ..... 4
-4. Method ..... 5
-4.1. Raw Data into 3D Volume ..... 5
-4.1.1. 3D Slicer ..... 6
-4.1.2. 3D Volume ..... 6
-4.2. Ray Marching ..... 7
-4.2.1. Camera to Fragment ..... 7
-4.2.2. Fragment to Light ..... 8
-4.2.3. Final Out custom Node Code ..... 8
-4.2.4. Scene, Controls, Build ..... 10
-5. Results ..... 10
-6. Discussion ..... 11
-7. References ..... 12
+Achilles Apostolou Mini Project
+![RTCG-Achillefs (1)_p2_img1](https://github.com/user-attachments/assets/55c8e9bf-7f2b-43fc-a217-1216561499a3)
+
+
+1. Table of Contents
+2. Abstract
+3. Introduction
+4. Method
+5. Results
+6. Discussion
+7. References
 
 ---
 
@@ -34,7 +24,8 @@ Volumetric Rendering is used to produce visual representations of 3D data sets, 
 Volume Rendering has a lot of applications. In Computer Graphics, we can use it for simulating volumetric effects such as clouds and explosions. In Medical Visualization Volume Rendering is used to parse through data interactively. Volume Rendering is also used in several other industries such as Archeology, Geology, Material Science and BIOlogy as well as many others.
 
 The idea is that Data is presented in the format of a sequence of images, that can be put together - like slices - to form volumetric data. That Volumetric Data is then taken and algorithmically forms an interactive 3D visualization out of it.
-![[RTCG-Achillefs (1)_p3_img2.png]]
+
+![RTCG-Achillefs (1)_p3_img2](https://github.com/user-attachments/assets/9c3cb450-c5e6-4b8b-a63a-1c730b861ea4)
 
 Figure 1: Volume Rendering for Visualization using Slices [1]
 
@@ -47,8 +38,9 @@ A 3D Volume of data is rendered in the form of distinct slices using alpha blend
 ### 3.1.1. Axis Alignment
 
 One very important variable that changes based on the Camera Position in relation to the Volumetric Data is the Step Size. The Step Size essentially is responsible for calculating the sampling distribution of the data relatively to how the View Direction changes.
-![[RTCG-Achillefs (1)_p4_img3.png]]
 
+
+![RTCG-Achillefs (1)_p4_img3](https://github.com/user-attachments/assets/eb754076-401b-4023-a54b-647e68d67566)
 Figure 2: Step Size and Sampling Distribution [1]
 
 ### 3.1.2. Camera Alignment
@@ -62,8 +54,8 @@ Similar to (3) it can be done by rendering an entire plane on each direction, bu
 # 3.1.3. Transfer Functions 
 
 A Transfer Function (f) is a concept that is commonly used in Volumetric Rendering, to map data value 'f' to color (RGB) and opacity (Alpha) per fragment. ' $F$ ' is a function that changes depending on the data that is visualized each time, but it usually has a range of values depending on the sampling. This way, certain parts of the data can stand out more in the Volume and since the range can be manipulated in Real-Time, different parts of the Data is visualized for different applications.
-![[RTCG-Achillefs (1)_p5_img4.png]]
 
+![RTCG-Achillefs (1)_p5_img4](https://github.com/user-attachments/assets/be475f63-30a3-4e61-83cc-8f7f19d8ba71)
 Figure 3:Transfer Function 'f' [1]
 
 ---
@@ -77,8 +69,8 @@ In order to make this Real-Time Medical Visualization application, there were tw
 The first step was to find a Raw Data file. For this, either an MRI or a CT-Scan could be used. Those data files usually come in either the .NRRD or .DICOM file formats. For this project, the CT-chest.nrrd file was used containing data from a male's chest CT-Scan.
 
 There are several software platforms for this type of data handling and medical image analysis and visualization. The most notable are 3D Slicer, MITK, OsiriX, Amira, ImageJ, MeVisLab as well as others [10]. Each have their strengths and weaknesses and the best choice depends on the requirements and goals of each respective project. For this project, 3D Slicer was used to handle and segment the raw data.
-![[RTCG-Achillefs (1)_p6_img5.png]]
 
+![RTCG-Achillefs (1)_p6_img5](https://github.com/user-attachments/assets/d9476624-816e-4ac6-b73c-7573401a725e)
 Figure 4: 3D Slicer interface. Handling CT-Scanned Data.
 
 ---
@@ -96,7 +88,8 @@ By going to Utilities -> Screen Capture and then Selecting which Orthographic Vi
 In order to create a 3D Texture in Unity, the workflow is usually fairly simple. However, it can only be created by using a single image file and not an image sequence. Therefore the sequence needed to be turned into an Image Atlas (Grid). [6]
 
 64 Images were exported from 3D Slicer to be turned into an 8x8 Atlas. Then Adobe Photoshop was used to turn the sequence into a single Image File. Using Photoshop's batch cropping automated the procedure.
-![[RTCG-Achillefs (1)_p7_img6.png]]
+![RTCG-Achillefs (1)_p7_img6](https://github.com/user-attachments/assets/ab4cce8e-d5c5-455a-ad52-ac8ff2b9b5a8)
+
 
 Then, Unity was responsible to turn the Atlas into a 3D Texture.
 
@@ -119,7 +112,8 @@ The scene essentially contains 3 Game Objects: The Main Camera, the Volumetric O
 
 ### 4.2.1. Camera to Fragment
 
-![[RTCG-Achillefs (1)_p8_img7.png]]
+![RTCG-Achillefs (1)_p8_img7](https://github.com/user-attachments/assets/78b8d057-2c83-43dd-b148-b40a15066fb8)
+
 
 Figure 5: ShaderGraph: Ray Marching from camera to fragment.
 
@@ -129,7 +123,8 @@ Rays are starting from the camera, towards the Volumetric Object, intersects the
 
 # 4.2.2. Fragment to Light 
 
-![[RTCG-Achillefs (1)_p9_img8.png]]
+![RTCG-Achillefs (1)_p9_img8](https://github.com/user-attachments/assets/3602d78c-3806-4927-8966-65042cf0cf5c)
+
 
 Figure 6: ShaderGraph: Ray Marching from fragment to light.
 For every pixel that the density is sampled from, a ray is being cast towards the light of the scene, to accumulate how much light would reach that pixel.
@@ -179,13 +174,14 @@ Figure 7: Code snippet for the main Node in the Shader Graph.
 # 4.2.4. Scene, Controls, Build 
 
 In order to Move around and inspect the Object in real time these simple C\# scripts have been made. Two sliders were implemented to change the scaling of the cube (so that it cuts through the Volume and changes what is visible and what is not). A simple control for the directional light has also been implemented, in such a way that by dragging the middle mouse button, the Light Direction rotates.
-![[RTCG-Achillefs (1)_p11_img9.png]]
 
+![RTCG-Achillefs (1)_p11_img9](https://github.com/user-attachments/assets/ab69e1e5-efec-48d8-acd0-c190294c525a)
 Figure 8: Code snippets for the Controls of the Objects.
 
 ## 5. Results
 
-![[RTCG-Achillefs (1)_p11_img10.png]]
+![RTCG-Achillefs (1)_p11_img10](https://github.com/user-attachments/assets/6ffb70ff-e4d1-4e46-81e7-762c6a63f46b)
+
 
 The Final Scene is a combination of all the theory and methods explained above. The Result is a very simple scene that can manipulate Volume Data in Real-Time. It's Important to Notice that this data started as a real CT-Scan and can now be Visualized using a Ray Marcher.
 
